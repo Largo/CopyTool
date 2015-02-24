@@ -1,0 +1,5 @@
+kopiertool.db
+workflow/
+ziel/
+*.exe
+log.txt

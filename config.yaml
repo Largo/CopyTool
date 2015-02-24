@@ -1,0 +1,23 @@
+# Config for Copytool
+# ---------------------
+# All paths can be relative or absolute
+# databaseFile: path to the database
+#sourceFiles: "workflow/*/*.pdf"  <= path matcher for the files that should be copied
+# destination_directory: "ziel/"  <= relative or absolute path to target folder
+# checkTimeForThread: 60 <= Time in seconds where ruby checks if the thread is still alive or if it has to be restarted.
+# loglevel # Minimum Events to write to logfile: 0 is for debug, 1 for info, 2 for warn, 3 for error, 4 for fatal , 5 for unknown.
+
+#sample config:
+# databaseFile: kopiertool.db
+# sourceFiles: "workflow/*/*.pdf"
+# destination_directory: "ziel/" 
+# checkTimeForThread: 60
+# logfile: log.txt
+# loglevel: 1
+
+databaseFile: kopiertool.db
+sourceFiles: "workflow/*/*.pdf"
+destination_directory: "ziel/"
+checkTimeForThread: 1800 # 1800 seconds 0.5h
+logfile: log.txt
+loglevel: 1 # info
