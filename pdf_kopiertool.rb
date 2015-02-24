@@ -87,6 +87,7 @@ puts "CopyTool"
 read_config()
 @logger = Logger.new(@logfilePath, 'daily')
 @logger.level = @loglevel
+@logger.info("CopyTool was started")
 
 checkForNewFilesAtBeginning()
 
@@ -97,8 +98,9 @@ filewatching = Thread.new {
 
  loop do
       begin
-        Kernel.sleep @checkTimeForThread # set this higher. it means that it sleeps x seconds until checking if thread still alive
+        Kernel.sleep @checkTimeForThread # this means that it sleeps x seconds until checking if thread still alive
       rescue SystemExit,Interrupt # end programm on interrupt/shutdown, maybe notify someone about a problem
+        @logger.error("CopyTool will exit because of interrupt or a shutdown")
         Kernel.exit
       end
       @logger.debug("Copytool: making sure that the FileWatching thread is still alive")
