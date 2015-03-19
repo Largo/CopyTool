@@ -37,6 +37,8 @@ def checkForNewFilesAtBeginning
 			databaseFile = db.get_first_value("select filename from files where filename = '#{basename}'")
 			@logger.debug(file)
 
+			Kernel.sleep 1 # wait an amount of time because of antivirus software
+
 			# if file is not in the db => copy the file
 			if not databaseFile.eql?(basename)
 				@logger.info("copied file: " + file)
@@ -53,6 +55,7 @@ def copyFile(file_path)
 		FileUtils.cp(file_path, @destination_directory) # source to destination
 		rescue SystemCallError
 			@logger.error("Error writing " +  @destination_directory + basename)
+			return false # don't add the file to the database!
 		end
 	#end
 
@@ -74,7 +77,7 @@ def watchForNewFiles
 	    @logger.info("File was added to source folder: " + filename)
 
 	    Thread.new (filename) {|filename|
-	    	Kernel.sleep 10 # sleep for 10 seconds to make sure that fuji wrote the whole file and
+	    	Kernel.sleep 10 # sleep for x seconds to make sure that the pdf generator software wrote the whole file and
 	    			 # that the lock on the file was closed. Also, I don't want to block the main thread.
 	    	copyFile(filename)
 	    }

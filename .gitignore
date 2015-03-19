@@ -3,3 +3,4 @@ workflow/
 ziel/
 *.exe
 log.txt
+log.txt*
